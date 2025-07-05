@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo Herrera | Book Leo to Speak</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Removed previous Google Fonts and added Glacial Indifference (assuming local or custom CDN load) -->
+    <!-- You would typically link a font file here, e.g., <link href="/path/to/glacial-indifference.css" rel="stylesheet"> -->
+    <style>
+        /* Reusing and adapting golf-themed colors for a professional speaking page */
+        :root {
+            --primary-green: #4CAF50; /* Grass green */
+            --primary-green-dark: #388E3C; /* Darker green for hover */
+            --primary-green-light: #C8E6C9; /* Light green for backgrounds */
+            --primary-green-ultra-light: #E8F5E9; /* Ultra light green */
+            --accent-gold: #FFD700; /* Gold for highlights */
+            --accent-gradient: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green gradient */
+            --accent-gradient-hover: linear-gradient(135deg, #388E3C, #4CAF50); /* Darker green gradient */
+            --neutral-dark: #2F4F4F; /* Dark slate grey */
+            --neutral-medium: #696969; /* Dim grey */
+            --neutral-light: #DCDCDC; /* Gainsboro */
+            --neutral-ultra-light: #F0F8F0; /* Almost white green */
+            --success-color: #4CAF50;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-strong: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        body {
+            font-family: 'Glacial Indifference', sans-serif; /* Changed font to Glacial Indifference */
+            background-color: var(--neutral-ultra-light);
+            color: var(--neutral-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Glacial Indifference', sans-serif; /* Changed font to Glacial Indifference */
+            font-weight: 700;
+            color: var(--neutral-dark);
+            line-height: 1.2;
+        }
+        h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; }
+        h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: var(--accent-gradient);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transform: perspective(1px) translateZ(0);
+        }
+        .btn-primary:hover {
+            background: var(--accent-gradient-hover);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(76, 175, 80, 0.4);
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            background-color: white;
+            color: var(--neutral-medium);
+            border: 2px solid #E2E8F0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn-secondary:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(76, 175, 80, 0.2);
+        }
+        .card-enhanced {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid #F1F5F9;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .card-enhanced:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+        .card-enhanced:hover::before {
+            transform: scaleX(1);
+        }
+        .hero-enhanced {
+            background: linear-gradient(135deg, var(--primary-green-ultra-light) 0%, white 50%, #F0F8F0 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+        }
+        .hero-enhanced::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 60%;
+            height: 180%;
+            background: radial-gradient(circle, var(--primary-green-light), transparent 70%);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: heroFloat 8s ease-in-out infinite;
+        }
+        .hero-enhanced::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 80%;
+            height: 120%;
+            background: radial-gradient(circle, #D8EFD8, transparent 60%);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: heroFloat 10s ease-in-out infinite reverse;
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-30px) rotate(2deg) scale(1.05); }
+            66% { transform: translateY(20px) rotate(-1deg) scale(0.98); }
+        }
+        .section-enhanced {
+            padding: 4rem 0;
+        }
+        .section-title {
+            font-size: clamp(2.2rem, 3.5vw, 3rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, var(--neutral-dark), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--neutral-medium);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+        .animate-fade-up {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-fade-up:not(.in-view) {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .animate-fade-up.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-scale-in {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-scale-in:not(.in-view) {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        .animate-scale-in.in-view {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .icon-enhanced {
+            background: linear-gradient(135deg, var(--primary-green-light), var(--primary-green-ultra-light));
+            border-radius: 20px;
+            padding: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .icon-enhanced:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .icon-enhanced i {
+            color: var(--primary-green);
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* Specific styles for this page */
+        .intro-quote-section {
+            background-image: url('https://ik.imagekit.io/ewoioxq0g/Leo%20Herrera/NEW%20Podcast%20(2).jpg?updatedAt=1750525709981'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 6rem 0;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .intro-quote-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            filter: grayscale(100%); /* Black and white effect */
+            z-index: 1;
+        }
+        .intro-quote-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--shadow-strong);
+            background-color: #000; /* Fallback background */
+        }
+        .video-container iframe,
+        .video-container .placeholder-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .speaking-package-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid #F1F5F9;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%; /* Ensure cards are same height */
+        }
+        .speaking-package-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-green);
+        }
+        .speaking-package-card .icon-enhanced {
+            margin-bottom: 1rem;
+        }
+        .speaking-package-card .price {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: var(--primary-green);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .client-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            justify-items: center;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .client-logo-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .client-logo-grid img {
+            max-width: 120px;
+            height: auto;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .client-logo-grid img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        /* Specific style for the image in the booking section */
+        .booking-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px; /* Adjust as needed */
+            box-shadow: var(--shadow-strong);
+        }
+        .booking-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px; /* Match container */
+            border: 4px solid var(--accent-gold); /* Gold border */
+            object-fit: cover;
+        }
+        .booking-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(var(--primary-green-dark-rgb), 0.7), transparent);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- HEADER SECTION (HERO) -->
+        <section id="hero" class="hero-enhanced pb-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Text Content -->
+                    <div class="animate-fade-up relative z-10 text-center lg:text-left">
+                        <h1 class="mb-4 font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                            Book Leo Herrera to Speak
+                        </h1>
+                        <p class="text-xl sm:text-2xl text-gray-700 mb-6 leading-relaxed font-medium">
+                            Inspiring the next generation of golfers to perform, create, and stay connected to greatness.
+                        </p>
+                        <ul class="list-none p-0 mb-8 text-gray-600 text-lg font-semibold space-y-2">
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i data-lucide="award" class="h-5 w-5 mr-3 text-green-500"></i> Pro Golfer
+                            </li>
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i data-lucide="trophy" class="h-5 w-5 mr-3 text-green-500"></i> USGA Champion
+                            </li>
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i data-lucide="lightbulb" class="h-5 w-5 mr-3 text-green-500"></i> Creative Performer
+                            </li>
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i data-lucide="link-2" class="h-5 w-5 mr-3 text-green-500"></i> Founder of the Stay Connected Movement
+                            </li>
+                        </ul>
+                        <p class="text-lg text-gray-600 mb-8 font-semibold">
+                            Now accepting 2025 speaking engagements for teams, events, schools, and corporate golf experiences.
+                        </p>
+                        <!-- Updated href to scroll to the booking section -->
+                        <a href="#book-leo" class="btn-primary w-full sm:w-auto mx-auto lg:mx-0">
+                            <i data-lucide="mail" class="mr-2 h-5 w-5"></i>
+                            Book Leo Now
+                        </a>
+                    </div>
+
+                    <!-- Speaker Promo Video Placeholder -->
+                    <div class="animate-scale-in relative z-10">
+                        <div class="video-container">
+                            <!-- Replace with actual embed code for speaker promo video -->
+                            <iframe
+                                src="https://www.youtube.com/embed/your-promo-video-id"
+                                title="Leo Herrera Speaker Promo Video"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                class="placeholder-video"
+                            ></iframe>
+                            <!-- Fallback for the video container -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-600 text-center p-4" style="pointer-events: none;">
+                                <p>Speaker Promo Video Placeholder<br> (Embed your short speaker promo video right here)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEO'S MISSION AS A SPEAKER SECTION (INTRO QUOTE) -->
+        <section id="mission" class="section-enhanced intro-quote-section rounded-3xl mx-4 sm:mx-8 lg:mx-16 my-12">
+            <div class="intro-quote-content">
+                <blockquote class="text-3xl sm:text-4xl lg:text-5xl font-extrabold italic mb-6 leading-tight">
+                    "I’m on a mission to help golfers, parents, coaches, and creators rethink what greatness looks like — and build a deeper connection to their craft, their voice, and their future."
+                </blockquote>
+                <p class="text-lg sm:text-xl font-medium leading-relaxed max-w-3xl mx-auto">
+                    Through powerful storytelling, mindset frameworks, and performance energy, I speak to audiences that are ready to grow — not just in the game, but in life.
+                </p>
+                <div class="mt-8">
+                    <p class="text-xl sm:text-2xl font-bold">
+                        Let’s create something unforgettable for your event, team, or brand.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEYNOTE TOPICS SECTION -->
+        <section id="topics" class="section-enhanced bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Keynote Topics</h2>
+                    <p class="section-subtitle">
+                        Engaging and actionable insights tailored for diverse audiences, from junior golfers to corporate leaders.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Topic 1: The Connected Golfer -->
+                    <div class="card-enhanced animate-fade-up">
+                        <div class="icon-enhanced"><i data-lucide="link" class="h-6 w-6"></i></div>
+                        <h3 class="text-xl font-bold mb-3">The Connected Golfer</h3>
+                        <p class="text-gray-600 mb-4">
+                            How to stay focused, inspired, and connected in a distracted world.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 text-sm space-y-2 text-left w-full pl-4">
+                            <li>The 12 archetypes of a fully developed golfer</li>
+                            <li>A proven blueprint for mindset, identity, and long-term vision</li>
+                            <li>Why today’s juniors need clarity beyond the leaderboard</li>
+                        </ul>
+                    </div>
+
+                    <!-- Topic 2: Passion into Platform -->
+                    <div class="card-enhanced animate-fade-up">
+                        <div class="icon-enhanced"><i data-lucide="rocket" class="h-6 w-6"></i></div>
+                        <h3 class="text-xl font-bold mb-3">Passion into Platform</h3>
+                        <p class="text-gray-600 mb-4">
+                            Turn your story into a powerful brand as a modern athlete.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 text-sm space-y-2 text-left w-full pl-4">
+                            <li>How Leo went from USGA Champion to 3-brand CEO</li>
+                            <li>The creator economy meets golf excellence</li>
+                            <li>Making purpose part of your performance plan</li>
+                        </ul>
+                    </div>
+
+                    <!-- Topic 3: The New Golf Dream -->
+                    <div class="card-enhanced animate-fade-up">
+                        <div class="icon-enhanced"><i data-lucide="briefcase" class="h-6 w-6"></i></div>
+                        <h3 class="text-xl font-bold mb-3">The New Golf Dream</h3>
+                        <p class="text-gray-600 mb-4">
+                            What golf teaches us about leadership, creativity, and connection (Corporate & Leadership Events).
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 text-sm space-y-2 text-left w-full pl-4">
+                            <li>Reimagining golf as a performance platform</li>
+                            <li>Culture, clarity, and identity in modern business</li>
+                            <li>Turning play into power</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPEAKING PACKAGES SECTION -->
+        <section id="packages" class="section-enhanced">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Speaking Packages</h2>
+                    <p class="section-subtitle">
+                        Flexible options to fit your event's needs, from impactful keynotes to full brand activations.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                    <!-- Package 1: Keynote Only -->
+                    <div class="speaking-package-card animate-fade-up">
+                        <div class="icon-enhanced"><i data-lucide="mic" class="h-6 w-6"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Keynote Only</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            45–60 minute in-person or virtual talk.
+                        </p>
+                        <div class="price">$3,000+</div>
+                        <p class="text-xs text-gray-500 mt-auto">Perfect for impactful presentations.</p>
+                    </div>
+
+                    <!-- Package 2: Keynote + Demo -->
+                    <div class="speaking-package-card animate-fade-up">
+                        <div class="icon-enhanced"><i data-lucide="play-circle" class="h-6 w-6"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Keynote + Demo</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Talk + Connected Performance Experience.
+                        </p>
+                        <div class="price">$5,000+</div>
+                        <p class="text-xs text-gray-500 mt-auto">Engage your audience with live demonstrations.</p>
+                    </div>
+
+                    <!-- Package 3: Full Activation -->
+                    <div class="speaking-package-card animate-fade-up">
+                        <div class="icon-enhanced"><i data-lucide="zap" class="h-6 w-6"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Full Activation</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Talk + VIP hits + brand experience + media opportunities.
+                        </p>
+                        <div class="price">$10,000–$25,000</div>
+                        <p class="text-xs text-gray-500 mt-auto">The ultimate immersive experience for your event.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 bg-green-50 rounded-2xl p-6 border border-green-200 animate-fade-up">
+                    <p class="text-lg font-semibold text-gray-700">
+                        Custom activations available for corporate retreats, brand events, or club showcases.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO LEO SPEAKS TO SECTION -->
+        <section id="audience" class="section-enhanced bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Who Leo Speaks To</h2>
+                    <p class="section-subtitle">
+                        Leo's message resonates with a wide range of audiences passionate about golf, performance, and personal growth.
+                    </p>
+                </div>
+
+                <div class="max-w-3xl mx-auto">
+                    <ul class="list-none p-0 grid grid-cols-1 md:grid-cols-2 gap-4 text-lg text-gray-700 font-medium">
+                        <li class="flex items-center card-enhanced p-4">
+                            <i data-lucide="users" class="h-5 w-5 mr-3 text-green-500 flex-shrink-0"></i>
+                            Junior Golf Teams & Academies
+                        </li>
+                        <li class="flex items-center card-enhanced p-4">
+                            <i data-lucide="graduation-cap" class="h-5 w-5 mr-3 text-green-500 flex-shrink-0"></i>
+                            High School & College Athletes
+                        </li>
+                        <li class="flex items-center card-enhanced p-4">
+                            <i data-lucide="person-standing" class="h-5 w-5 mr-3 text-green-500 flex-shrink-0"></i>
+                            Golf Coaches & Influencers
+                        </li>
+                        <li class="flex items-center card-enhanced p-4">
+                            <i data-lucide="building-2" class="h-5 w-5 mr-3 text-green-500 flex-shrink-0"></i>
+                            Corporate Golf Retreats & Brand Events
+                        </li>
+                        <li class="flex items-center card-enhanced p-4 md:col-span-2">
+                            <i data-lucide="edit" class="h-5 w-5 mr-3 text-green-500 flex-shrink-0"></i>
+                            Content Creators & Entrepreneurial Athletes
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Placeholder for client logos/testimonials (as per design tip) -->
+                <div class="text-center mt-16">
+                    <h3 class="text-xl font-bold text-gray-700 mb-8">Trusted by Leading Organizations & Teams</h3>
+                    <div class="client-logo-grid">
+                        <img src="https://placehold.co/150x80/ffffff/4CAF50?text=Golf+Academy+Logo" alt="Golf Academy Logo">
+                        <img src="https://placehold.co/150x80/ffffff/4CAF50?text=Sports+Brand+Logo" alt="Sports Brand Logo">
+                        <img src="https://placehold.co/150x80/ffffff/4CAF50?text=University+Logo" alt="University Logo">
+                        <img src="https://placehold.co/150x80/ffffff/4CAF50?text=Corporate+Client+Logo" alt="Corporate Client Logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- READY TO BOOK LEO? SECTION (BOOKING CTA) -->
+        <section id="book-leo" class="section-enhanced hero-enhanced py-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left side: Text Content -->
+                    <div class="max-w-3xl mx-auto text-center lg:text-left">
+                        <h2 class="section-title !text-left">Ready to Book Leo?</h2>
+                        <p class="section-subtitle !text-left mb-8">
+                            Whether you want a mindset-shifting talk, a live performance, or a full brand activation — Leo brings an unforgettable presence to every room he walks into.
+                        </p>
+                        <!-- Main CTA button - now scrolls to this section -->
+                        <a href="https://calendly.com/lherrera20-1/1-1-call-with-me" target="_blank" class="btn-primary w-full sm:w-auto mx-auto lg:mx-0 text-lg py-4">
+                            <i data-lucide="calendar" class="mr-3 h-6 w-6"></i>
+                            Schedule a Call with Leo
+                        </a>
+                        <p class="text-lg text-gray-700 mt-6 mb-2">
+                            If the direct scheduling button above doesn't work for you, please reach out via:
+                        </p>
+                        <a href="mailto:leo@stayconnectedgolf.com" class="text-xl font-semibold text-green-700 hover:underline block mb-2">
+                            <i data-lucide="mail" class="inline-block mr-2 h-6 w-6 align-middle"></i>
+                            leo@stayconnectedgolf.com
+                        </a>
+                        <div class="mt-4 flex items-center justify-center lg:justify-start text-xl text-gray-600">
+                            <i data-lucide="instagram" class="h-6 w-6 mr-2"></i>
+                            Follow: <a href="https://www.instagram.com/leoherrera.golf/" target="_blank" class="font-semibold text-green-700 hover:underline ml-2">@leoherrera.golf</a>
+                        </div>
+                    </div>
+
+                    <!-- Right side: Image Placeholder -->
+                    <div class="animate-scale-in relative z-10 booking-image-container">
+                        <img
+                            src="https://ik.imagekit.io/ewoioxq0g/Leo%20Herrera/IMG_8545%20(1).jpg?updatedAt=1751730631375"
+                            alt="Leo Herrera Speaking"
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x400/4CAF50/ffffff?text=Leo+Speaking+Image';"
+                        >
+                        <div class="booking-image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-white font-bold text-xl mb-4">Leo Herrera</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Pro Golfer, USGA Champion, Creative Performer, and Founder of the Stay Connected Movement. Inspiring greatness on and off the course.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/leopoldo-herrera-88a1a0237/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        </a>
+                        <a href="mailto:leo@stayconnectedgolf.com" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="mail" class="h-5 w-5"></i>
+                        </a>
+                        <a href="https://www.instagram.com/leoherrera.golf/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Speaking Topics</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li>The Connected Golfer</li>
+                        <li>Passion into Platform</li>
+                        <li>The New Golf Dream</li>
+                        <li>Custom Engagements</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Connect</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li>
+                            <a href="mailto:leo@stayconnectedgolf.com" class="hover:text-white transition-colors">leo@stayconnectedgolf.com</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/leoherrera.golf/" target="_blank" class="hover:text-white transition-colors">@leoherrera.golf</a>
+                        </li>
+                        <li>Available for 2025 Bookings</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Leo Herrera. All rights reserved. | Inspiring Greatness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '50px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-fade-up, .animate-scale-in').forEach(el => {
+                observer.observe(el);
+                // Also add 'in-view' if element is already in view on load
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                if (rect.top >= 0 && rect.top <= windowHeight) {
+                    el.classList.add('in-view');
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent default anchor click behavior
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
