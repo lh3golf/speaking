@@ -133,18 +133,24 @@
             position: relative;
             overflow: hidden;
             padding: 4rem 0;
+            background-image: url('https://ik.imagekit.io/ewoioxq0g/Leo%20Herrera/imgi_39_abhout-sec-background.jpeg'); /* Updated background image */
+            background-size: cover;
+            background-position: center;
         }
         .hero-enhanced::before {
             content: '';
             position: absolute;
-            top: -30%;
-            right: -15%;
-            width: 60%;
-            height: 180%;
-            background: radial-gradient(circle, var(--primary-green-light), transparent 70%);
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: heroFloat 8s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.7); /* Semi-transparent white overlay */
+            backdrop-filter: blur(8px); /* Blur effect */
+            z-index: 0; /* Ensure it's behind content but above background image */
+        }
+        .hero-enhanced .container {
+            position: relative;
+            z-index: 1;
         }
         .hero-enhanced::after {
             content: '';
@@ -157,6 +163,7 @@
             border-radius: 50%;
             opacity: 0.1;
             animation: heroFloat 10s ease-in-out infinite reverse;
+            z-index: 1; /* Ensure these are also above the blur layer */
         }
         @keyframes heroFloat {
             0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
@@ -259,7 +266,7 @@
             position: relative;
             width: 100%;
             height: 0;
-            padding-bottom: 150%; /* Adjusted for 3456x5184 image (height/width * 100%) */
+            padding-bottom: 75%; /* Adjusted for half smaller height (150% / 2 = 75%) */
             overflow: hidden;
             border-radius: 20px;
             box-shadow: var(--shadow-strong);
@@ -457,7 +464,6 @@
                             How to stay focused, inspired, and connected in a distracted world.
                         </p>
                         <ul class="list-disc list-inside text-gray-600 text-sm space-y-2 text-left w-full pl-4">
-                            <li>The 12 archetypes of a fully developed golfer</li>
                             <li>A proven blueprint for mindset, identity, and long-term vision</li>
                             <li>Why today’s juniors need clarity beyond the leaderboard</li>
                         </ul>
@@ -512,7 +518,7 @@
                         <p class="text-gray-600 text-sm mb-4">
                             45–60 minute in-person or virtual talk.
                         </p>
-                        <div class="price">$3,000+</div>
+                        <div class="price">$3000+</div>
                         <p class="text-xs text-gray-500 mt-auto">Perfect for impactful presentations.</p>
                     </div>
 
@@ -523,7 +529,7 @@
                         <p class="text-gray-600 text-sm mb-4">
                             Talk + Connected Performance Experience.
                         </p>
-                        <div class="price">$5,000+</div>
+                        <div class="price">$5000+</div>
                         <p class="text-xs text-gray-500 mt-auto">Engage your audience with live demonstrations.</p>
                     </div>
 
